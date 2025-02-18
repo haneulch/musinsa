@@ -1,14 +1,16 @@
-INSERT INTO Category (id, code, name)
-VALUES (1, 'top', '상의'),
-       (2, 'outer', '아우터'),
-       (3, 'pants', '바지'),
-       (4, 'sneakers', '스니커즈'),
-       (5, 'bag', '가방'),
-       (6, 'hat', '모자'),
-       (7, 'socks', '양말'),
-       (8, 'accessory', '액세사리');
+DELETE FROM CATEGORY;
+INSERT INTO CATEGORY (code, name)
+VALUES ('top', '상의'),
+       ( 'outer', '아우터'),
+       ( 'pants', '바지'),
+       ( 'sneakers', '스니커즈'),
+       ( 'bag', '가방'),
+       ( 'hat', '모자'),
+       ( 'socks', '양말'),
+       ( 'accessory', '액세사리');
 
-INSERT INTO Brand(id, name)
+DELETE FROM BRAND;
+INSERT INTO BRAND(id, name)
 VALUES (1, 'A'),
        (2, 'B'),
        (3, 'C'),
@@ -19,7 +21,8 @@ VALUES (1, 'A'),
        (8, 'H'),
        (9, 'I');
 
-INSERT INTO Item(id, name, brandId, brandName, categoryCode, categoryName, price)
+DELETE FROM ITEM;
+INSERT INTO ITEM(id, name, brandId, brandName, categoryCode, categoryName, price)
 VALUES (1, 'A_top', 1, 'A', 'top', '상의', 11200),
        (2, 'B_top', 2, 'B', 'top', '상의', 10500),
        (3, 'C_top', 3, 'C', 'top', '상의', 10000),
@@ -98,4 +101,4 @@ VALUES (1, 'A_top', 1, 'A', 'top', '상의', 11200),
        (76, 'F_accessory', 6, 'F', 'accessory', '액세사리', 1900),
        (77, 'G_accessory', 7, 'G', 'accessory', '액세사리', 2000),
        (78, 'H_accessory', 8, 'H', 'accessory', '액세사리', 2000),
-       (79, 'I_accessory', 9, 'I', 'accessory', '액세사리', 2400),
+       (79, 'I_accessory', 9, 'I', 'accessory', '액세사리', 2400);

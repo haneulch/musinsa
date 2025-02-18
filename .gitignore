@@ -36,3 +36,4 @@ build/
 /.idea
 .mvn
 data
+/frontend/dist/

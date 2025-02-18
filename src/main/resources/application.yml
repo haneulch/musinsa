@@ -4,17 +4,23 @@ server:
 spring:
   application:
     name: catalog
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
   datasource:
-    url: jdbc:h2:file:./data/testdb;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE
+    url: jdbc:h2:file:./data/testdb;DATABASE_TO_UPPER=false
     driver-class-name: org.h2.Driver
     username: test
     password: test
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
 
 logging:
   level:
-    org: DEBUG
+    org: INFO
