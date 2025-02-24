@@ -1,4 +1,4 @@
-package com.musinsa.catalog.item;
+package com.musinsa.catalog.item.web;
 
 import com.musinsa.catalog.config.user.annotation.UserId;
 import com.musinsa.catalog.item.dto.CreateItemRequest;
@@ -7,6 +7,7 @@ import com.musinsa.catalog.item.dto.ItemDto;
 import com.musinsa.catalog.item.dto.LowestItemByCategoryDto;
 import com.musinsa.catalog.item.dto.LowestItemByCategoryResponse;
 import com.musinsa.catalog.item.dto.UpdateItemRequest;
+import com.musinsa.catalog.item.service.ItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,9 +1,10 @@
-package com.musinsa.catalog.category;
+package com.musinsa.catalog.category.web;
 
 import com.musinsa.catalog.category.dto.CategoryDto;
 import com.musinsa.catalog.category.dto.CreateCategoryRequest;
 import com.musinsa.catalog.category.dto.DeleteCategoryRequest;
 import com.musinsa.catalog.category.dto.UpdateCategoryRequest;
+import com.musinsa.catalog.category.service.CategoryService;
 import com.musinsa.catalog.config.user.annotation.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

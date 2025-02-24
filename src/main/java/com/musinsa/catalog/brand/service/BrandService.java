@@ -8,6 +8,7 @@ import com.musinsa.catalog.config.cache.CacheType;
 import com.musinsa.catalog.config.cache.annotation.EvictCachesByType;
 import com.musinsa.catalog.persistence.entity.BrandEntity;
 import com.musinsa.catalog.persistence.repository.BrandRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import static com.musinsa.catalog.config.cache.CacheName.BRAND_LIST_CACHE;
 public class BrandService {
   private final BrandRepository brandRepository;
 
+  @Transactional
   @EvictCachesByType(CacheType.BRAND)
   public void create(CreateBrandRequest request, String userId) {
     BrandEntity brandEntity = BrandEntity.builder()
@@ -36,11 +38,13 @@ public class BrandService {
     return brandRepository.findAllByDeleteYn(YnType.N);
   }
 
+  @Transactional
   @EvictCachesByType(CacheType.BRAND)
   public void update(long id, UpdateBrandRequest request, String userId) {
     brandRepository.updateBrandName(id, request.name(), userId);
   }
 
+  @Transactional
   @EvictCachesByType(CacheType.BRAND)
   public void delete(List<Long> ids, String userId) {
     brandRepository.deleteAllById(ids, userId);

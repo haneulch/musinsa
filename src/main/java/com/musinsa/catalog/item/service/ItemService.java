@@ -1,7 +1,7 @@
-package com.musinsa.catalog.item;
+package com.musinsa.catalog.item.service;
 
 import com.musinsa.catalog.brand.service.BrandService;
-import com.musinsa.catalog.category.CategoryService;
+import com.musinsa.catalog.category.service.CategoryService;
 import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.item.dto.CreateItemRequest;
 import com.musinsa.catalog.item.dto.ItemDto;

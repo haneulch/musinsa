@@ -1,4 +1,4 @@
-package com.musinsa.catalog.category;
+package com.musinsa.catalog.category.service;
 
 import com.musinsa.catalog.category.dto.CategoryDto;
 import com.musinsa.catalog.category.dto.CreateCategoryRequest;
@@ -8,6 +8,7 @@ import com.musinsa.catalog.config.cache.CacheType;
 import com.musinsa.catalog.config.cache.annotation.EvictCachesByType;
 import com.musinsa.catalog.persistence.entity.CategoryEntity;
 import com.musinsa.catalog.persistence.repository.CategoryRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class CategoryService {
     return categoryRepository.findAllByDeleteYn(YnType.N);
   }
 
+  @Transactional
   @EvictCachesByType(CacheType.CATEGORY)
   public void create(CreateCategoryRequest request, String userId) {
     CategoryEntity newCategory = CategoryEntity.builder()
@@ -37,11 +39,13 @@ public class CategoryService {
     categoryRepository.save(newCategory);
   }
 
+  @Transactional
   @EvictCachesByType(CacheType.CATEGORY)
   public void update(long id, UpdateCategoryRequest updateCategoryDto, String userId) {
     categoryRepository.updateCategoryName(id, updateCategoryDto.name(), userId);
   }
 
+  @Transactional
   @EvictCachesByType(CacheType.CATEGORY)
   public void delete(List<Long> ids, String userId) {
     categoryRepository.deleteAllById(ids, userId);
