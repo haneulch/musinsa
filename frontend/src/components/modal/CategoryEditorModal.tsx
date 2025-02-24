@@ -34,15 +34,15 @@ const CategoryEditorModal: FC<ModalProps<any>> = ({ form, open, onClose }) => {
   });
 
   return (
-    <Modal title={ isEdit ? 'Edit Item' : 'Add Item' } open={ open } onOk={ onSubmit } onCancel={ onClose }>
-      <Form form={ form } layout="vertical">
-        <Form.Item label="ID" name="id" hidden={ !isEdit }>
-          <Input disabled={ isEdit } />
+    <Modal title={isEdit ? 'Edit Item' : 'Add Item'} open={open} onOk={onSubmit} onCancel={onClose}>
+      <Form form={form} layout="vertical">
+        <Form.Item label="ID" name="id" hidden={!isEdit}>
+          <Input disabled={isEdit} />
         </Form.Item>
-        <Form.Item label="Code" name="code" rules={ [{ required: true }] }>
-          <Input />
+        <Form.Item label="Code" name="code" rules={[{ required: true }]}>
+          <Input disabled={isEdit} />
         </Form.Item>
-        <Form.Item label="Name" name="name" rules={ [{ required: true }] }>
+        <Form.Item label="Name" name="name" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
       </Form>
