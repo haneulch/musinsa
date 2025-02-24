@@ -11,7 +11,7 @@ export interface PostCreateCategoryRequest {
 }
 
 export interface PostUpdateCategoryByIdRequest {
-  id: number;
+  code: string;
   name: string;
   updatedId: string;
 }

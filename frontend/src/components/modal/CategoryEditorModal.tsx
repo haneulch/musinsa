@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Form, Input, Modal } from 'antd';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { postCreateCategory, postUpdateCategoryById } from '../../api/category/category.api.ts';
+import { postCreateCategory, postUpdateCategoryByCode } from '../../api/category/category.api.ts';
 import { ModalProps } from '../common/common.interface.ts';
 import { GET_CATEGORY_LIST } from '../../pages/common/constants.ts';
 
@@ -27,7 +27,7 @@ const CategoryEditorModal: FC<ModalProps<any>> = ({ form, open, onClose }) => {
   });
 
   const updateMutation = useMutation({
-    mutationFn: postUpdateCategoryById,
+    mutationFn: postUpdateCategoryByCode,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [GET_CATEGORY_LIST] });
     },

@@ -19,9 +19,6 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "baseUrl": "./",
-//    "paths": {
-//      "@/*": ["src/*"]
-//    },
 
     /* Linting */
     "strict": true,
