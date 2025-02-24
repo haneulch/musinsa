@@ -79,7 +79,7 @@ class CategoryRepositoryTests {
     // When
     final String newName = "newCategory";
     final String updatedId = "system";
-    categoryRepository.updateCategoryName(category.getId(), newName, updatedId);
+    categoryRepository.updateCategoryName(category.getCode(), newName, updatedId);
     entityManager.clear();
 
     // Then
