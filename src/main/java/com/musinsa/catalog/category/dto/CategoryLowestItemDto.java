@@ -1,22 +1,18 @@
 package com.musinsa.catalog.category.dto;
 
-import lombok.Getter;
-
 import java.util.List;
 
 public class CategoryLowestItemDto {
+  public record CategoryLowestItemResponse(
+      List<Item> items,
+      int totalPrice
+  ) {}
 
-  @Getter
-  public static class CategoryLowestItemResponse {
-    private List<Item> items;
-    private int totalPrice;
-
-    static class Item {
-      private String categoryCode;
-      private String categoryName;
-      private long brandId;
-      private String brandName;
-      private long price;
-    }
-  }
+  public record Item(
+      String categoryCode,
+      String categoryName,
+      long brandId,
+      String brandName,
+      long price
+  ) {}
 }
