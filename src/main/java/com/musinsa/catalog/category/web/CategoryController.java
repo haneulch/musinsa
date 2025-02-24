@@ -1,11 +1,11 @@
 package com.musinsa.catalog.category.web;
 
-import com.musinsa.catalog.category.dto.CategoryDto;
-import com.musinsa.catalog.category.dto.CreateCategoryRequest;
-import com.musinsa.catalog.category.dto.DeleteCategoryRequest;
-import com.musinsa.catalog.category.dto.UpdateCategoryRequest;
+import com.musinsa.catalog.category.dto.CreateCategoryReqDto;
+import com.musinsa.catalog.category.dto.DeleteCategoryReqDto;
+import com.musinsa.catalog.category.dto.UpdateCategoryReqDto;
 import com.musinsa.catalog.category.service.CategoryService;
 import com.musinsa.catalog.config.user.annotation.UserId;
+import com.musinsa.catalog.persistence.vo.CategoryVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,23 +23,23 @@ public class CategoryController {
   private final CategoryService categoryService;
 
   @GetMapping
-  public List<CategoryDto> getCategory() {
-    List<CategoryDto> list = categoryService.getCategories();
+  public List<CategoryVO> getCategory() {
+    List<CategoryVO> list = categoryService.getCategories();
     return list;
   }
 
   @PostMapping("create")
-  public void postCategory(@UserId String userId, @RequestBody CreateCategoryRequest request) {
+  public void postCategory(@UserId String userId, @RequestBody CreateCategoryReqDto request) {
     categoryService.create(request, userId);
   }
 
   @PostMapping("update/{id}")
-  public void postCategoryUpdate(@PathVariable long id, @UserId String userId, @RequestBody UpdateCategoryRequest request) {
+  public void postCategoryUpdate(@PathVariable long id, @UserId String userId, @RequestBody UpdateCategoryReqDto request) {
     categoryService.update(id, request, userId);
   }
 
   @PostMapping("delete")
-  public void deleteCategory(@UserId String userId, @RequestBody DeleteCategoryRequest request) {
+  public void deleteCategory(@UserId String userId, @RequestBody DeleteCategoryReqDto request) {
     categoryService.delete(request.ids(), userId);
   }
 }

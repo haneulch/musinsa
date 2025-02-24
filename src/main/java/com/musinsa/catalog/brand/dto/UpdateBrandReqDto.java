@@ -1,6 +1,6 @@
 package com.musinsa.catalog.brand.dto;
 
-public record UpdateBrandRequest(
+public record UpdateBrandReqDto(
     String name
 ) {
 }

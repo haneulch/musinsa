@@ -1,6 +1,6 @@
-package com.musinsa.catalog.item.dto;
+package com.musinsa.catalog.persistence.vo;
 
-public record ItemDto(
+public record ItemVO(
     long id,
     String name,
     long brandId,

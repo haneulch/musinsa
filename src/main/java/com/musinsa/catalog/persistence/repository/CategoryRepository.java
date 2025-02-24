@@ -1,8 +1,8 @@
 package com.musinsa.catalog.persistence.repository;
 
-import com.musinsa.catalog.category.dto.CategoryDto;
 import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.persistence.entity.CategoryEntity;
+import com.musinsa.catalog.persistence.vo.CategoryVO;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
-  List<CategoryDto> findAllByDeleteYn(YnType deleteYn);
+  List<CategoryVO> findAllByDeleteYn(YnType deleteYn);
 
   Optional<CategoryEntity> findByCode(String code);
 

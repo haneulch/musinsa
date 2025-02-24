@@ -1,13 +1,13 @@
 package com.musinsa.catalog.brand.service;
 
-import com.musinsa.catalog.brand.dto.BrandDto;
-import com.musinsa.catalog.brand.dto.CreateBrandRequest;
-import com.musinsa.catalog.brand.dto.UpdateBrandRequest;
+import com.musinsa.catalog.brand.dto.CreateBrandReqDto;
+import com.musinsa.catalog.brand.dto.UpdateBrandReqDto;
 import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.config.cache.CacheType;
 import com.musinsa.catalog.config.cache.annotation.EvictCachesByType;
 import com.musinsa.catalog.persistence.entity.BrandEntity;
 import com.musinsa.catalog.persistence.repository.BrandRepository;
+import com.musinsa.catalog.persistence.vo.BrandVO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
@@ -25,7 +25,7 @@ public class BrandService {
 
   @Transactional
   @EvictCachesByType(CacheType.BRAND)
-  public void create(CreateBrandRequest request, String userId) {
+  public void create(CreateBrandReqDto request, String userId) {
     BrandEntity brandEntity = BrandEntity.builder()
         .name(request.name())
         .createdId(userId)
@@ -34,13 +34,13 @@ public class BrandService {
   }
 
   @Cacheable(value = BRAND_LIST_CACHE, unless = "#result == null or #result.isEmpty()")
-  public List<BrandDto> getBrands() {
+  public List<BrandVO> getBrands() {
     return brandRepository.findAllByDeleteYn(YnType.N);
   }
 
   @Transactional
   @EvictCachesByType(CacheType.BRAND)
-  public void update(long id, UpdateBrandRequest request, String userId) {
+  public void update(long id, UpdateBrandReqDto request, String userId) {
     brandRepository.updateBrandName(id, request.name(), userId);
   }
 

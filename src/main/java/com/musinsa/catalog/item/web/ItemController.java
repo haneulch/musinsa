@@ -1,13 +1,13 @@
 package com.musinsa.catalog.item.web;
 
 import com.musinsa.catalog.config.user.annotation.UserId;
-import com.musinsa.catalog.item.dto.CreateItemRequest;
-import com.musinsa.catalog.item.dto.DeleteItemRequest;
-import com.musinsa.catalog.item.dto.ItemDto;
-import com.musinsa.catalog.item.dto.LowestItemByCategoryDto;
-import com.musinsa.catalog.item.dto.LowestItemByCategoryResponse;
-import com.musinsa.catalog.item.dto.UpdateItemRequest;
+import com.musinsa.catalog.item.dto.CreateItemReqDto;
+import com.musinsa.catalog.item.dto.DeleteItemReqDto;
+import com.musinsa.catalog.item.dto.LowestItemByCategoryResDto;
+import com.musinsa.catalog.item.dto.UpdateItemReqDto;
 import com.musinsa.catalog.item.service.ItemService;
+import com.musinsa.catalog.persistence.vo.ItemVO;
+import com.musinsa.catalog.persistence.vo.LowestItemByCategoryVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,40 +25,40 @@ public class ItemController {
   private final ItemService itemService;
 
   @GetMapping
-  public List<ItemDto> item() {
+  public List<ItemVO> item() {
     return itemService.getItem();
   }
 
   @GetMapping("lowest/category")
-  public LowestItemByCategoryResponse lowestCategory() {
-    List<LowestItemByCategoryDto> result = itemService.findLowestItems();
-    return new LowestItemByCategoryResponse(result);
+  public LowestItemByCategoryResDto lowestCategory() {
+    List<LowestItemByCategoryVO> result = itemService.findLowestItems();
+    return new LowestItemByCategoryResDto(result);
   }
 
   @GetMapping("lowest/brand")
-  public LowestItemByCategoryResponse lowestBrand() {
-    List<LowestItemByCategoryDto> result = itemService.findLowestItemsByBrand();
-    return new LowestItemByCategoryResponse(result);
+  public LowestItemByCategoryResDto lowestBrand() {
+    List<LowestItemByCategoryVO> result = itemService.findLowestItemsByBrand();
+    return new LowestItemByCategoryResDto(result);
   }
 
   @GetMapping("minmax/category/{categoryCode}")
-  public LowestItemByCategoryResponse minmaxCategory(@PathVariable String categoryCode) {
-    List<LowestItemByCategoryDto> result = itemService.findMinMaxItemsByBrand(categoryCode);
-    return new LowestItemByCategoryResponse(result);
+  public LowestItemByCategoryResDto minmaxCategory(@PathVariable String categoryCode) {
+    List<LowestItemByCategoryVO> result = itemService.findMinMaxItemsByBrand(categoryCode);
+    return new LowestItemByCategoryResDto(result);
   }
 
   @PostMapping("create")
-  public void create(@UserId String userId, @RequestBody CreateItemRequest request) {
+  public void create(@UserId String userId, @RequestBody CreateItemReqDto request) {
     itemService.create(request, userId);
   }
 
   @PostMapping("update/{id}")
-  public void update(@PathVariable long id, @UserId String userId, @RequestBody UpdateItemRequest request) {
+  public void update(@PathVariable long id, @UserId String userId, @RequestBody UpdateItemReqDto request) {
     itemService.update(id, request, userId);
   }
 
   @PostMapping("delete")
-  public void delete(@RequestBody DeleteItemRequest request) {
+  public void delete(@RequestBody DeleteItemReqDto request) {
     itemService.delete(request.ids());
   }
 }

@@ -1,9 +1,9 @@
 package com.musinsa.catalog.persistence.repository;
 
 import com.musinsa.catalog.common.code.YnType;
-import com.musinsa.catalog.item.dto.ItemDto;
-import com.musinsa.catalog.item.dto.LowestItemByCategoryDto;
 import com.musinsa.catalog.persistence.entity.ItemEntity;
+import com.musinsa.catalog.persistence.vo.ItemVO;
+import com.musinsa.catalog.persistence.vo.LowestItemByCategoryVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
-  List<ItemDto> findAllByDeleteYn(YnType deleteYn);
+  List<ItemVO> findAllByDeleteYn(YnType deleteYn);
 
   @Query(value =
       "SELECT id, brandName, categoryName, price\n" +
@@ -23,7 +23,7 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
           ") ranked\n" +
           "WHERE rn = 1 ORDER BY categoryCode;",
       nativeQuery = true)
-  List<LowestItemByCategoryDto> findLowestItemsByCategory();
+  List<LowestItemByCategoryVO> findLowestItemsByCategory();
 
   @Query(value = "SELECT id, brandName, categoryName, price\n" +
       "FROM ITEM i\n" +
@@ -35,7 +35,7 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
       "    ORDER BY SUM(price) ASC\n" +
       "    LIMIT 1) ORDER BY categoryCode;\n",
       nativeQuery = true)
-  List<LowestItemByCategoryDto> findLowestItemsByBrand();
+  List<LowestItemByCategoryVO> findLowestItemsByBrand();
 
   @Query(value = "SELECT id, brandName, categoryName, price\n" +
       "FROM ITEM i\n" +
@@ -45,5 +45,5 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
       "    OR\n" +
       "    i.price = (SELECT MAX(price) FROM ITEM WHERE categoryCode = :categoryCode)\n" +
       ");", nativeQuery = true)
-  List<LowestItemByCategoryDto> findMinMaxByCategory(String categoryCode);
+  List<LowestItemByCategoryVO> findMinMaxByCategory(String categoryCode);
 }

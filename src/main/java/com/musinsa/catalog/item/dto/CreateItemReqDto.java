@@ -1,6 +1,6 @@
 package com.musinsa.catalog.item.dto;
 
-public record CreateItemRequest(
+public record CreateItemReqDto(
     String name,
     long brandId,
     String categoryCode,

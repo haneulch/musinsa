@@ -1,5 +1,6 @@
 package com.musinsa.catalog.item.dto;
 
+import com.musinsa.catalog.persistence.vo.LowestItemByCategoryVO;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -7,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public class LowestItemByCategoryResponse {
+public class LowestItemByCategoryResDto {
   private final List<ItemElement> items;
   private int totalPrice;
 
@@ -20,7 +21,7 @@ public class LowestItemByCategoryResponse {
     private int price;
   }
 
-  public LowestItemByCategoryResponse(List<LowestItemByCategoryDto> list) {
+  public LowestItemByCategoryResDto(List<LowestItemByCategoryVO> list) {
     this.items = new ArrayList<>();
 
     list.forEach(item -> {

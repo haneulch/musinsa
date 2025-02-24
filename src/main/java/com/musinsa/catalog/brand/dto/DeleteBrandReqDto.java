@@ -2,7 +2,7 @@ package com.musinsa.catalog.brand.dto;
 
 import java.util.List;
 
-public record DeleteBrandRequest(
+public record DeleteBrandReqDto(
     List<Long> ids
 ) {
 }
