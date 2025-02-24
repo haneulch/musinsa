@@ -3,20 +3,18 @@ package com.musinsa.catalog.category;
 import com.musinsa.catalog.category.dto.CategoryDto;
 import com.musinsa.catalog.category.dto.CreateCategoryRequest;
 import com.musinsa.catalog.category.dto.UpdateCategoryRequest;
+import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.config.cache.CacheType;
 import com.musinsa.catalog.config.cache.annotation.EvictCachesByType;
-import com.musinsa.catalog.hibernate.entity.CategoryEntity;
-import com.musinsa.catalog.hibernate.repository.CategoryRepository;
-import com.musinsa.common.Code;
+import com.musinsa.catalog.persistence.entity.CategoryEntity;
+import com.musinsa.catalog.persistence.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.musinsa.catalog.config.cache.CacheName.CATEGORY_BY_CODE;
 import static com.musinsa.catalog.config.cache.CacheName.CATEGORY_BY_CODE_CACHE;
-import static com.musinsa.catalog.config.cache.CacheName.CATEGORY_LIST;
 import static com.musinsa.catalog.config.cache.CacheName.CATEGORY_LIST_CACHE;
 
 @Service
@@ -26,7 +24,7 @@ public class CategoryService {
 
   @Cacheable(value = CATEGORY_LIST_CACHE, unless = "#result == null or #result.isEmpty()")
   public List<CategoryDto> getCategories() {
-    return categoryRepository.findAllByDeleteYn(Code.YnType.N);
+    return categoryRepository.findAllByDeleteYn(YnType.N);
   }
 
   @EvictCachesByType(CacheType.CATEGORY)

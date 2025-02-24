@@ -1,16 +1,16 @@
 package com.musinsa.catalog.item;
 
-import com.musinsa.catalog.brand.BrandService;
+import com.musinsa.catalog.brand.service.BrandService;
 import com.musinsa.catalog.category.CategoryService;
-import com.musinsa.catalog.hibernate.entity.BrandEntity;
-import com.musinsa.catalog.hibernate.entity.CategoryEntity;
-import com.musinsa.catalog.hibernate.entity.ItemEntity;
+import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.item.dto.CreateItemRequest;
 import com.musinsa.catalog.item.dto.ItemDto;
 import com.musinsa.catalog.item.dto.LowestItemByCategoryDto;
 import com.musinsa.catalog.item.dto.UpdateItemRequest;
-import com.musinsa.catalog.hibernate.repository.ItemRepository;
-import com.musinsa.common.Code;
+import com.musinsa.catalog.persistence.entity.BrandEntity;
+import com.musinsa.catalog.persistence.entity.CategoryEntity;
+import com.musinsa.catalog.persistence.entity.ItemEntity;
+import com.musinsa.catalog.persistence.repository.ItemRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class ItemService {
   private final ItemRepository itemRepository;
 
   public List<ItemDto> getItem() {
-    return itemRepository.findAllByDeleteYn(Code.YnType.N);
+    return itemRepository.findAllByDeleteYn(YnType.N);
   }
 
   public List<LowestItemByCategoryDto> findLowestItems() {

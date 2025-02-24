@@ -1,6 +1,6 @@
-package com.musinsa.catalog.hibernate.entity;
+package com.musinsa.catalog.persistence.entity;
 
-import com.musinsa.common.Code;
+import com.musinsa.catalog.common.code.YnType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -11,27 +11,37 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 @Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "CATEGORY")
+@Table(name = "ITEM")
 @DynamicInsert
 @DynamicUpdate
-public class CategoryEntity extends BaseEntity {
+public class ItemEntity extends BaseEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String code;
-
   private String name;
 
+  private long brandId;
+
+  private String brandName;
+
+  private String categoryCode;
+
+  private String categoryName;
+
+  private int price;
+
   @Enumerated(EnumType.STRING)
-  private Code.YnType deleteYn;
+  private YnType deleteYn;
 }

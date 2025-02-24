@@ -1,4 +1,4 @@
-package com.musinsa.catalog.hibernate.entity;
+package com.musinsa.catalog.persistence.entity;
 
 import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;

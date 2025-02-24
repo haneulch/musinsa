@@ -1,7 +1,8 @@
 package com.musinsa.catalog.hibernate.repository;
 
-import com.musinsa.catalog.hibernate.entity.BrandEntity;
-import com.musinsa.common.Code.YnType;
+import com.musinsa.catalog.common.code.YnType;
+import com.musinsa.catalog.persistence.entity.BrandEntity;
+import com.musinsa.catalog.persistence.repository.BrandRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

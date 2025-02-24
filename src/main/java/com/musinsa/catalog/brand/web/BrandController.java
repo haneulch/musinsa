@@ -1,10 +1,11 @@
-package com.musinsa.catalog.brand;
+package com.musinsa.catalog.brand.web;
 
 import com.musinsa.catalog.brand.dto.BrandDto;
 import com.musinsa.catalog.brand.dto.CreateBrandRequest;
 import com.musinsa.catalog.brand.dto.DeleteBrandRequest;
 import com.musinsa.catalog.brand.dto.UpdateBrandRequest;
-import com.musinsa.catalog.config.annotation.UserId;
+import com.musinsa.catalog.brand.service.BrandService;
+import com.musinsa.catalog.config.user.annotation.UserId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

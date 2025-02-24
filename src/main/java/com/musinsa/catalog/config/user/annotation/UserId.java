@@ -1,4 +1,4 @@
-package com.musinsa.catalog.config.annotation;
+package com.musinsa.catalog.config.user.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

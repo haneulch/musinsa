@@ -1,6 +1,6 @@
 package com.musinsa.catalog.item;
 
-import com.musinsa.catalog.config.annotation.UserId;
+import com.musinsa.catalog.config.user.annotation.UserId;
 import com.musinsa.catalog.item.dto.CreateItemRequest;
 import com.musinsa.catalog.item.dto.DeleteItemRequest;
 import com.musinsa.catalog.item.dto.ItemDto;

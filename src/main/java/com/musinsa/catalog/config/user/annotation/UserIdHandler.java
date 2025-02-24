@@ -1,6 +1,6 @@
-package com.musinsa.catalog.config.annotation;
+package com.musinsa.catalog.config.user.annotation;
 
-import com.musinsa.catalog.util.JwtUtils;
+import com.musinsa.catalog.security.JwtTokenParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 @Component
 @RequiredArgsConstructor
 public class UserIdHandler implements HandlerMethodArgumentResolver {
-  private final JwtUtils jwtUtil;
+  private final JwtTokenParser jwtUtil;
 
   @Override
   public boolean supportsParameter(MethodParameter parameter) {

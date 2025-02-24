@@ -1,9 +1,9 @@
-package com.musinsa.catalog.hibernate.repository;
+package com.musinsa.catalog.persistence.repository;
 
-import com.musinsa.catalog.hibernate.entity.ItemEntity;
+import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.item.dto.ItemDto;
 import com.musinsa.catalog.item.dto.LowestItemByCategoryDto;
-import com.musinsa.common.Code;
+import com.musinsa.catalog.persistence.entity.ItemEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
-  List<ItemDto> findAllByDeleteYn(Code.YnType deleteYn);
+  List<ItemDto> findAllByDeleteYn(YnType deleteYn);
 
   @Query(value =
       "SELECT id, brandName, categoryName, price\n" +

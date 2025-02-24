@@ -1,21 +1,21 @@
-package com.musinsa.catalog.brand;
-
-import static com.musinsa.catalog.config.cache.CacheName.BRAND_BY_ID_CACHE;
-import static com.musinsa.catalog.config.cache.CacheName.BRAND_LIST_CACHE;
+package com.musinsa.catalog.brand.service;
 
 import com.musinsa.catalog.brand.dto.BrandDto;
 import com.musinsa.catalog.brand.dto.CreateBrandRequest;
 import com.musinsa.catalog.brand.dto.UpdateBrandRequest;
+import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.config.cache.CacheType;
 import com.musinsa.catalog.config.cache.annotation.EvictCachesByType;
-import com.musinsa.catalog.hibernate.entity.BrandEntity;
-import com.musinsa.catalog.hibernate.repository.BrandRepository;
-import com.musinsa.common.Code;
+import com.musinsa.catalog.persistence.entity.BrandEntity;
+import com.musinsa.catalog.persistence.repository.BrandRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static com.musinsa.catalog.config.cache.CacheName.BRAND_BY_ID_CACHE;
+import static com.musinsa.catalog.config.cache.CacheName.BRAND_LIST_CACHE;
 
 @Service
 @RequiredArgsConstructor
@@ -33,7 +33,7 @@ public class BrandService {
 
   @Cacheable(value = BRAND_LIST_CACHE, unless = "#result == null or #result.isEmpty()")
   public List<BrandDto> getBrands() {
-    return brandRepository.findAllByDeleteYn(Code.YnType.N);
+    return brandRepository.findAllByDeleteYn(YnType.N);
   }
 
   @EvictCachesByType(CacheType.BRAND)

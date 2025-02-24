@@ -1,4 +1,4 @@
-package com.musinsa.catalog.util;
+package com.musinsa.catalog.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 
 @Component
-public class JwtUtils {
+public class JwtTokenParser {
   @Value("${secret.name}")
   private String name;
 

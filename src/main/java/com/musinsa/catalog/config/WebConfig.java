@@ -1,6 +1,6 @@
 package com.musinsa.catalog.config;
 
-import com.musinsa.catalog.config.annotation.UserIdHandler;
+import com.musinsa.catalog.config.user.annotation.UserIdHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
