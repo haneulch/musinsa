@@ -1,28 +1,41 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+import pluginReact from 'eslint-plugin-react';
+import pluginReactHooks from 'eslint-plugin-react-hooks';
+import pluginPrettier from 'eslint-plugin-prettier';
 
-export default tseslint.config(
-  { ignores: ['dist'] },
+/** @type {import('eslint').Linter.FlatConfig[]} */
+export default [
   {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
     languageOptions: {
-      ecmaVersion: 2020,
       globals: globals.browser,
+      ecmaVersion: 'latest',
+      sourceType: 'module',
     },
-    plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+    settings: {
+      react: {
+        version: 'detect',
+      },
     },
   },
-)
+  ...tseslint.configs.recommended,
+  pluginReact.configs.flat.recommended,
+  pluginReactHooks.configs.recommended,
+  {
+    plugins: {
+      prettier: pluginPrettier,
+    },
+    rules: {
+      'prettier/prettier': 'warn',
+    },
+  },
+  {
+    rules: {
+      'react/react-in-jsx-scope': 'off', // Next.js 사용 시 불필요
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // 미사용 변수 경고
+      'react-hooks/rules-of-hooks': 'error', // React Hooks 규칙 강제
+      'react-hooks/exhaustive-deps': 'warn', // useEffect 종속성 검사
+    },
+  },
+];
