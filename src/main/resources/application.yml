@@ -4,23 +4,35 @@ server:
 spring:
   application:
     name: catalog
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=5m
+  datasource:
+    url: jdbc:h2:mem:test-db;DATABASE_TO_UPPER=false
+    driver-class-name: org.h2.Driver
+    username: test
+    password:
   sql:
     init:
       mode: always
-      schema-locations: classpath:schema.sql
-      data-locations: classpath:data.sql
-  datasource:
-    url: jdbc:h2:file:./data/testdb;DATABASE_TO_UPPER=false
-    driver-class-name: org.h2.Driver
-    username: test
-    password: test
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: none
     show-sql: true
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+
+secret:
+  name: USER_ID
+  key: "wH5pbJDmpvIKWy3k5CXHTIApJEb3M/EAT7EwSrBscJA="
 
 logging:
   level:
+    com: DEBUG
     org: INFO
