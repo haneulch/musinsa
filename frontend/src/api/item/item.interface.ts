@@ -20,6 +20,11 @@ export interface GetLowestItemResponse {
   totalPrice: number;
 }
 
+export interface GetMinMaxItemResponse {
+  lowestItems: ItemElement[];
+  highestItems: ItemElement[];
+}
+
 export interface PostCreateItemRequest {
   name: string;
   brandId: number;
