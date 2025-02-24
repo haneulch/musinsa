@@ -1,8 +1,7 @@
-package com.musinsa.catalog.hibernate.repository;
+package com.musinsa.catalog.persistence.repository;
 
-import com.musinsa.catalog.common.code.YnType.YnType;
+import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.persistence.entity.CategoryEntity;
-import com.musinsa.catalog.persistence.repository.CategoryRepository;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
