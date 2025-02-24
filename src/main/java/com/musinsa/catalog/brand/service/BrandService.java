@@ -7,6 +7,7 @@ import com.musinsa.catalog.config.cache.CacheType;
 import com.musinsa.catalog.config.cache.annotation.EvictCachesByType;
 import com.musinsa.catalog.persistence.entity.BrandEntity;
 import com.musinsa.catalog.persistence.repository.BrandRepository;
+import com.musinsa.catalog.persistence.repository.ItemRepository;
 import com.musinsa.catalog.persistence.vo.BrandVO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,15 +23,17 @@ import static com.musinsa.catalog.config.cache.CacheName.BRAND_LIST_CACHE;
 @RequiredArgsConstructor
 public class BrandService {
   private final BrandRepository brandRepository;
+  private final ItemRepository itemRepository;
 
   @Transactional
   @EvictCachesByType(CacheType.BRAND)
-  public void create(CreateBrandReqDto request, String userId) {
+  public long create(CreateBrandReqDto request, String userId) {
     BrandEntity brandEntity = BrandEntity.builder()
         .name(request.name())
         .createdId(userId)
         .build();
     brandRepository.save(brandEntity);
+    return brandEntity.getId();
   }
 
   @Cacheable(value = BRAND_LIST_CACHE, unless = "#result == null or #result.isEmpty()")
@@ -42,6 +45,7 @@ public class BrandService {
   @EvictCachesByType(CacheType.BRAND)
   public void update(long id, UpdateBrandReqDto request, String userId) {
     brandRepository.updateBrandName(id, request.name(), userId);
+    itemRepository.updateBrandName(id, request.name());
   }
 
   @Transactional

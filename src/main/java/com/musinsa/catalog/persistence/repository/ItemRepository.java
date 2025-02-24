@@ -4,7 +4,9 @@ import com.musinsa.catalog.common.code.YnType;
 import com.musinsa.catalog.persistence.entity.ItemEntity;
 import com.musinsa.catalog.persistence.vo.ItemVO;
 import com.musinsa.catalog.persistence.vo.LowestItemByCategoryVO;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -46,4 +48,14 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
       "    i.price = (SELECT MAX(price) FROM ITEM WHERE categoryCode = :categoryCode)\n" +
       ");", nativeQuery = true)
   List<LowestItemByCategoryVO> findMinMaxByCategory(String categoryCode);
+
+  @Modifying
+  @Transactional
+  @Query("UPDATE ItemEntity i SET i.brandName = :brandName WHERE i.brandId = :brandId")
+  void updateBrandName(long brandId, String brandName);
+
+  @Modifying
+  @Transactional
+  @Query("UPDATE ItemEntity i SET i.categoryName = :categoryName WHERE i.categoryCode = :categoryCode")
+  void updateCategoryName(String categoryCode, String categoryName);
 }

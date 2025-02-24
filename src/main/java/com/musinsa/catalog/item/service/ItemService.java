@@ -42,7 +42,7 @@ public class ItemService {
   }
 
   @Transactional
-  public void create(CreateItemReqDto request, String userId) {
+  public long create(CreateItemReqDto request, String userId) {
     BrandEntity brand = brandService.getBrand(request.brandId());
     CategoryEntity category = categoryService.getCategory(request.categoryCode());
 
@@ -56,6 +56,7 @@ public class ItemService {
         .createdId(userId)
         .build();
     itemRepository.save(itemEntity);
+    return itemEntity.getId();
   }
 
   @Transactional

@@ -4,6 +4,7 @@ import com.musinsa.catalog.config.user.annotation.UserId;
 import com.musinsa.catalog.item.dto.CreateItemReqDto;
 import com.musinsa.catalog.item.dto.DeleteItemReqDto;
 import com.musinsa.catalog.item.dto.LowestItemByCategoryResDto;
+import com.musinsa.catalog.item.dto.MinMaxItemResDto;
 import com.musinsa.catalog.item.dto.UpdateItemReqDto;
 import com.musinsa.catalog.item.service.ItemService;
 import com.musinsa.catalog.persistence.vo.ItemVO;
@@ -42,9 +43,9 @@ public class ItemController {
   }
 
   @GetMapping("minmax/category/{categoryCode}")
-  public LowestItemByCategoryResDto minmaxCategory(@PathVariable String categoryCode) {
+  public MinMaxItemResDto minmaxCategory(@PathVariable String categoryCode) {
     List<LowestItemByCategoryVO> result = itemService.findMinMaxItemsByBrand(categoryCode);
-    return new LowestItemByCategoryResDto(result);
+    return new MinMaxItemResDto(result);
   }
 
   @PostMapping("create")

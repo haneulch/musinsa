@@ -7,6 +7,7 @@ import com.musinsa.catalog.config.cache.CacheType;
 import com.musinsa.catalog.config.cache.annotation.EvictCachesByType;
 import com.musinsa.catalog.persistence.entity.CategoryEntity;
 import com.musinsa.catalog.persistence.repository.CategoryRepository;
+import com.musinsa.catalog.persistence.repository.ItemRepository;
 import com.musinsa.catalog.persistence.vo.CategoryVO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import static com.musinsa.catalog.config.cache.CacheName.CATEGORY_LIST_CACHE;
 @RequiredArgsConstructor
 public class CategoryService {
   private final CategoryRepository categoryRepository;
+  private final ItemRepository itemRepository;
 
   @Cacheable(value = CATEGORY_LIST_CACHE, unless = "#result == null or #result.isEmpty()")
   public List<CategoryVO> getCategories() {
@@ -30,19 +32,21 @@ public class CategoryService {
 
   @Transactional
   @EvictCachesByType(CacheType.CATEGORY)
-  public void create(CreateCategoryReqDto request, String userId) {
+  public long create(CreateCategoryReqDto request, String userId) {
     CategoryEntity newCategory = CategoryEntity.builder()
         .code(request.code())
         .name(request.name())
         .createdId(userId)
         .build();
     categoryRepository.save(newCategory);
+    return newCategory.getId();
   }
 
   @Transactional
   @EvictCachesByType(CacheType.CATEGORY)
-  public void update(long id, UpdateCategoryReqDto updateCategoryDto, String userId) {
-    categoryRepository.updateCategoryName(id, updateCategoryDto.name(), userId);
+  public void update(String code, UpdateCategoryReqDto updateCategoryDto, String userId) {
+    categoryRepository.updateCategoryName(code, updateCategoryDto.name(), userId);
+    itemRepository.updateCategoryName(code, updateCategoryDto.name());
   }
 
   @Transactional

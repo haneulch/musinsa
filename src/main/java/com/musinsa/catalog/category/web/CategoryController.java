@@ -24,8 +24,7 @@ public class CategoryController {
 
   @GetMapping
   public List<CategoryVO> getCategory() {
-    List<CategoryVO> list = categoryService.getCategories();
-    return list;
+    return categoryService.getCategories();
   }
 
   @PostMapping("create")
@@ -33,9 +32,9 @@ public class CategoryController {
     categoryService.create(request, userId);
   }
 
-  @PostMapping("update/{id}")
-  public void postCategoryUpdate(@PathVariable long id, @UserId String userId, @RequestBody UpdateCategoryReqDto request) {
-    categoryService.update(id, request, userId);
+  @PostMapping("update/{code}")
+  public void postCategoryUpdate(@PathVariable String code, @UserId String userId, @RequestBody UpdateCategoryReqDto request) {
+    categoryService.update(code, request, userId);
   }
 
   @PostMapping("delete")
